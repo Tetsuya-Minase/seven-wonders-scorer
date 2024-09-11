@@ -26,7 +26,9 @@
             "prefix": "seven-wonders-scorer",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     {
