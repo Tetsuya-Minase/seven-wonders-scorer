@@ -9,36 +9,185 @@
           {{ username() }}_{{ showModal() }}
           <form [formGroup]="updateScoreForm" (ngSubmit)="updateScore()">
             <h2>update score form</h2>
-            <label>
-              civilizationScore: <input type="number" formControlName="civilizationScore"/>
-            </label>
-            <label>
-              militaryScore: <input type="number" formControlName="militaryScore"/>
-            </label>
-            <div formGroupName="scienceScore">
-              scienceScore
-              <label>compass count: <input type="number" formControlName="compass"/></label>
-              <label>gear count: <input type="number" formControlName="gear"/></label>
-              <label>tablet count: <input type="number" formControlName="tablet"/></label>
+            <div class="flex flex-col items-center">
+              <label for="civilizationScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Civilization Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="civilizationScoreId"
+                    type="number"
+                    formControlName="civilizationScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_civilization_score bg-white focus:outline-none focus:ring-2 focus:ring-br_civilization_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
             </div>
-            <label>
-              commercialScore: <input type="number" formControlName="commercialScore"/>
-            </label>
-            <label>
-              guildScore: <input type="number" formControlName="guildScore"/>
-            </label>
-            <label>
-              cityScore: <input type="number" formControlName="cityScore"/>
-            </label>
-            <label>
-              leaderScore: <input type="number" formControlName="leaderScore"/>
-            </label>
-            <label>
-              coinScore: <input type="number" formControlName="coinScore"/>
-            </label>
-            <label>
-              wonderScore: <input type="number" formControlName="wonderScore"/>
-            </label>
+            <div class="flex flex-col items-center">
+              <label for="militaryScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Military Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="militaryScoreId"
+                    type="number"
+                    formControlName="militaryScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_military_score bg-white focus:outline-none focus:ring-2 focus:ring-br_military_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
+            <div formGroupName="scienceScore">
+              <div class="flex flex-col items-center">
+                <label for="compassScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                  Compass Score
+                </label>
+                <div class="relative w-24 h-24">
+                  <input
+                      id="compassScoreId"
+                      type="number"
+                      formControlName="compass"
+                      class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_science_score bg-white focus:outline-none focus:ring-2 focus:ring-br_science_score"
+                      min="0"
+                      max="999"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col items-center">
+                <label for="gearScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                  Gear Score
+                </label>
+                <div class="relative w-24 h-24">
+                  <input
+                      id="gearScoreId"
+                      type="number"
+                      formControlName="gear"
+                      class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_science_score bg-white focus:outline-none focus:ring-2 focus:ring-br_science_score"
+                      min="0"
+                      max="999"
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col items-center">
+                <label for="tabletScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                  Tablet Score
+                </label>
+                <div class="relative w-24 h-24">
+                  <input
+                      id="tabletScoreId"
+                      type="number"
+                      formControlName="tablet"
+                      class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_science_score bg-white focus:outline-none focus:ring-2 focus:ring-br_science_score"
+                      min="0"
+                      max="999"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <label for="commercialScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Commercial Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="commercialScoreId"
+                    type="number"
+                    formControlName="commercialScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_commercial_score bg-white focus:outline-none focus:ring-2 focus:ring-br_commercial_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <label for="guildScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Guild Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="guildScoreId"
+                    type="number"
+                    formControlName="guildScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_guild_score bg-white focus:outline-none focus:ring-2 focus:ring-br_guild_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <label for="cityScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                City Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="cityScoreId"
+                    type="number"
+                    formControlName="cityScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_city_score bg-white focus:outline-none focus:ring-2 focus:ring-br_city_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <label for="leaderScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Leader Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="leaderScoreId"
+                    type="number"
+                    formControlName="leaderScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_leader_score bg-white focus:outline-none focus:ring-2 focus:ring-br_leader_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <label for="coinScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Coin Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="coinScoreId"
+                    type="number"
+                    formControlName="coinScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_coin_score bg-white focus:outline-none focus:ring-2 focus:ring-br_coin_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <label for="wonderScoreId" class="mb-2 text-sm font-medium text-gray-700">
+                Wonder Score
+              </label>
+              <div class="relative w-24 h-24">
+                <input
+                    id="wonderScoreId"
+                    type="number"
+                    formControlName="wonderScore"
+                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-br_wonder_score bg-white focus:outline-none focus:ring-2 focus:ring-br_wonder_score"
+                    min="0"
+                    max="999"
+                />
+              </div>
+            </div>
             <button type="submit" [disabled]="!updateScoreForm.valid">登録</button>
           </form>
         </div>
