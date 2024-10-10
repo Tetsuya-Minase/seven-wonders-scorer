@@ -1,0 +1,20 @@
+<div class="flex flex-col items-center">
+  <label [for]="formId" class="mb-2 text-sm font-medium text-gray-700">
+    {{ typeLabel }}
+  </label>
+  <div class="relative w-24 h-24">
+    <input
+        [id]="formId"
+        type="number"
+        [(ngModel)]="value"
+        (ngModelChange)="onChange($event)"
+        (blur)="onTouched()"
+        [disabled]="disabled"
+        class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
+             border-4 border-blue-500 bg-white focus:outline-none focus:ring-2 focus:ring-blue-300"
+        [ngClass]="borderColorClass()"
+        min="0"
+        max="999"
+    />
+  </div>
+</div>
