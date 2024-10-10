@@ -13,23 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ScoreService } from '../../services/score.service';
-
-interface UpdateScoreForm {
-  username: FormControl<string>;
-  civilizationScore: FormControl<number>;
-  militaryScore: FormControl<number>;
-  scienceScore: FormGroup<{
-    gear: FormControl<number>;
-    compass: FormControl<number>;
-    tablet: FormControl<number>;
-  }>;
-  commercialScore: FormControl<number>;
-  guildScore: FormControl<number>;
-  cityScore: FormControl<number>;
-  leaderScore: FormControl<number>;
-  coinScore: FormControl<number>;
-  wonderScore: FormControl<number>;
-}
+import { UpdateScoreForm } from './type';
 
 @Component({
   selector: 'seven-wonders-scorer-score-update-modal',
@@ -100,4 +84,6 @@ export class ScoreUpdateModalComponent {
       }
     );
   }
+
+  protected readonly FormControl = FormControl;
 }

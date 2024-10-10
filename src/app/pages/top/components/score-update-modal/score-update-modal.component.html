@@ -9,185 +9,63 @@
           {{ username() }}_{{ showModal() }}
           <form [formGroup]="updateScoreForm" (ngSubmit)="updateScore()">
             <h2>update score form</h2>
-            <div class="flex flex-col items-center">
-              <label for="civilizationScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Civilization Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="civilizationScoreId"
-                    type="number"
-                    formControlName="civilizationScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_civilization_score bg-white focus:outline-none focus:ring-2 focus:ring-br_civilization_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <label for="militaryScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Military Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="militaryScoreId"
-                    type="number"
-                    formControlName="militaryScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_military_score bg-white focus:outline-none focus:ring-2 focus:ring-br_military_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
+            <seven-wonders-scorer-score-input-form
+                type="civilization"
+                formControlName="civilizationScore"
+                borderColorClass="border-br_civilization_score focus:ring-br_civilization_score"
+            ></seven-wonders-scorer-score-input-form>
+            <seven-wonders-scorer-score-input-form
+                type="military"
+                formControlName="militaryScore"
+                borderColorClass="border-br_military_score focus:ring-br_military_score"
+            ></seven-wonders-scorer-score-input-form>
             <div formGroupName="scienceScore">
-              <div class="flex flex-col items-center">
-                <label for="compassScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                  Compass Score
-                </label>
-                <div class="relative w-24 h-24">
-                  <input
-                      id="compassScoreId"
-                      type="number"
-                      formControlName="compass"
-                      class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_science_score bg-white focus:outline-none focus:ring-2 focus:ring-br_science_score"
-                      min="0"
-                      max="999"
-                  />
-                </div>
-              </div>
-              <div class="flex flex-col items-center">
-                <label for="gearScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                  Gear Score
-                </label>
-                <div class="relative w-24 h-24">
-                  <input
-                      id="gearScoreId"
-                      type="number"
-                      formControlName="gear"
-                      class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_science_score bg-white focus:outline-none focus:ring-2 focus:ring-br_science_score"
-                      min="0"
-                      max="999"
-                  />
-                </div>
-              </div>
-              <div class="flex flex-col items-center">
-                <label for="tabletScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                  Tablet Score
-                </label>
-                <div class="relative w-24 h-24">
-                  <input
-                      id="tabletScoreId"
-                      type="number"
-                      formControlName="tablet"
-                      class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_science_score bg-white focus:outline-none focus:ring-2 focus:ring-br_science_score"
-                      min="0"
-                      max="999"
-                  />
-                </div>
-              </div>
+              <seven-wonders-scorer-score-input-form
+                  type="compass"
+                  formControlName="compass"
+                  borderColorClass="border-br_science_score focus:ring-br_science_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="gear"
+                  formControlName="gear"
+                  borderColorClass="border-br_science_score focus:ring-br_science_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="tablet"
+                  formControlName="tablet"
+                  borderColorClass="border-br_science_score focus:ring-br_science_score"
+              ></seven-wonders-scorer-score-input-form>
             </div>
-            <div class="flex flex-col items-center">
-              <label for="commercialScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Commercial Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="commercialScoreId"
-                    type="number"
-                    formControlName="commercialScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_commercial_score bg-white focus:outline-none focus:ring-2 focus:ring-br_commercial_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <label for="guildScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Guild Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="guildScoreId"
-                    type="number"
-                    formControlName="guildScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_guild_score bg-white focus:outline-none focus:ring-2 focus:ring-br_guild_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <label for="cityScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                City Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="cityScoreId"
-                    type="number"
-                    formControlName="cityScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_city_score bg-white focus:outline-none focus:ring-2 focus:ring-br_city_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <label for="leaderScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Leader Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="leaderScoreId"
-                    type="number"
-                    formControlName="leaderScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_leader_score bg-white focus:outline-none focus:ring-2 focus:ring-br_leader_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <label for="coinScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Coin Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="coinScoreId"
-                    type="number"
-                    formControlName="coinScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_coin_score bg-white focus:outline-none focus:ring-2 focus:ring-br_coin_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <label for="wonderScoreId" class="mb-2 text-sm font-medium text-gray-700">
-                Wonder Score
-              </label>
-              <div class="relative w-24 h-24">
-                <input
-                    id="wonderScoreId"
-                    type="number"
-                    formControlName="wonderScore"
-                    class="remove-arrow absolute inset-0 w-full h-full rounded-full text-center text-3xl font-bold
-             border-4 border-br_wonder_score bg-white focus:outline-none focus:ring-2 focus:ring-br_wonder_score"
-                    min="0"
-                    max="999"
-                />
-              </div>
-            </div>
+            <seven-wonders-scorer-score-input-form
+                type="commercial"
+                formControlName="commercialScore"
+                borderColorClass="border-br_commercial_score focus:ring-br_commercial_score"
+            ></seven-wonders-scorer-score-input-form>
+            <seven-wonders-scorer-score-input-form
+                type="guild"
+                formControlName="guildScore"
+                borderColorClass="border-br_guild_score focus:ring-br_guild_score"
+            ></seven-wonders-scorer-score-input-form>
+            <seven-wonders-scorer-score-input-form
+                type="city"
+                formControlName="cityScore"
+                borderColorClass="border-br_city_score focus:ring-br_city_score"
+            ></seven-wonders-scorer-score-input-form>
+            <seven-wonders-scorer-score-input-form
+                type="leader"
+                formControlName="leaderScore"
+                borderColorClass="border-br_leader_score focus:ring-br_leader_score"
+            ></seven-wonders-scorer-score-input-form>
+            <seven-wonders-scorer-score-input-form
+                type="coin"
+                formControlName="coinScore"
+                borderColorClass="border-br_coin_score focus:ring-br_coin_score"
+            ></seven-wonders-scorer-score-input-form>
+            <seven-wonders-scorer-score-input-form
+                type="wonder"
+                formControlName="wonderScore"
+                borderColorClass="border-br_wonder_score focus:ring-br_wonder_score"
+            ></seven-wonders-scorer-score-input-form>
             <button type="submit" [disabled]="!updateScoreForm.valid">登録</button>
           </form>
         </div>
