@@ -51,12 +51,34 @@ export class ScoreUpdateModalComponent {
     effect(() => {
       console.log('username: ', this.username());
       this.updateScoreForm.patchValue({ username: this.username() });
+      
+      // ユーザー名が変更されたときに、そのユーザーの現在のスコアを取得してフォームに設定する
+      const currentUsername = this.username();
+      if (currentUsername) {
+        const userScore = this.scoreService.getScoreByUsername(currentUsername);
+        if (userScore) {
+          this.updateScoreForm.patchValue({
+            civilizationScore: userScore.civilScore,
+            militaryScore: userScore.militaryScore,
+            scienceScore: {
+              gear: userScore.scienceScore.gear,
+              compass: userScore.scienceScore.compass,
+              tablet: userScore.scienceScore.tablet,
+            },
+            commercialScore: userScore.commercialScore,
+            guildScore: userScore.guildScore,
+            cityScore: userScore.cityScore,
+            leaderScore: userScore.leaderScore,
+            coinScore: userScore.coinScore,
+            wonderScore: userScore.wonderScore,
+          });
+        }
+      }
     });
   }
 
   public closeModal() {
     this.closeModalEvent.emit();
-    this.updateScoreForm.reset();
   }
 
   public updateScore() {
