@@ -41,6 +41,10 @@ export class ScoreService {
     this.scoreListState.updateWonderScore(username, score.wonderScore);
   }
 
+  public getScoreByUsername(username: string): Score | undefined {
+    return this.getScore().find((score) => score.username === username);
+  }
+
   public getScore(): Score[] {
     return this.#state.scores().map((score) => {
       const scienceSet = Math.min(

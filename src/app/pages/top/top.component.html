@@ -1,43 +1,11 @@
 <ul class="grid grid-cols-1 desktop:grid-cols-2 gap-2 desktop:gap-4">
   <li *ngFor="let score of scores">
-    <seven-wonders-scorer-user-card [score]="score"></seven-wonders-scorer-user-card>
+    <seven-wonders-scorer-user-card [score]="score"
+                                    (openModalEvent)="openModal($event)"></seven-wonders-scorer-user-card>
   </li>
 </ul>
 <button (click)="addUser()">addUser</button>
-<form [formGroup]="updateScoreForm" (ngSubmit)="updateScore()">
-  <h2>update score form</h2>
-  <label>
-    username: <input type="text" formControlName="username"/>
-  </label>
-  <label>
-    civilizationScore: <input type="number" formControlName="civilizationScore"/>
-  </label>
-  <label>
-    militaryScore: <input type="number" formControlName="militaryScore"/>
-  </label>
-  <div formGroupName="scienceScore">
-    scienceScore
-    <label>compass count: <input type="number" formControlName="compass"/></label>
-    <label>gear count: <input type="number" formControlName="gear"/></label>
-    <label>tablet count: <input type="number" formControlName="tablet"/></label>
-  </div>
-  <label>
-    commercialScore: <input type="number" formControlName="commercialScore"/>
-  </label>
-  <label>
-    guildScore: <input type="number" formControlName="guildScore"/>
-  </label>
-  <label>
-    cityScore: <input type="number" formControlName="cityScore"/>
-  </label>
-  <label>
-    leaderScore: <input type="number" formControlName="leaderScore"/>
-  </label>
-  <label>
-    coinScore: <input type="number" formControlName="coinScore"/>
-  </label>
-  <label>
-    wonderScore: <input type="number" formControlName="wonderScore"/>
-  </label>
-  <button type="submit" [disabled]="!updateScoreForm.valid">登録</button>
-</form>
+<seven-wonders-scorer-score-update-modal [showModal]="showModal"
+                                         [username]="username"
+                                         (closeModalEvent)="closeModal()"
+></seven-wonders-scorer-score-update-modal>

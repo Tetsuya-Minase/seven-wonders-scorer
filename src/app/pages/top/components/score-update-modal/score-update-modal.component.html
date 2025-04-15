@@ -1,0 +1,94 @@
+<div [class]="'relative z-10 ' + (showModal() ? '' : 'hidden')" aria-labelledby="modal-title" role="dialog"
+     aria-modal="true">
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full justify-center p-4 text-center sm:items-center sm:p-0">
+      <div
+          class="relative transform overflow-hidden rounded-lg bg-white px-3 pb-3 pt-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl smartphone:max-w-3xl desktop:max-w-4xl sm:p-6">
+        <div>
+          {{ username() }}_{{ showModal() }}
+          <form [formGroup]="updateScoreForm" (ngSubmit)="updateScore()">
+            <h2>update score form</h2>
+            <div class="grid grid-cols-1 gap-2 smartphone:grid-cols-3 smartphone:gap-2 desktop:grid-cols-4 desktop:gap-3">
+              <seven-wonders-scorer-score-input-form
+                  type="civilization"
+                  formControlName="civilizationScore"
+                  borderColorClass="border-br_civilization_score focus:ring-br_civilization_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="military"
+                  formControlName="militaryScore"
+                  borderColorClass="border-br_military_score focus:ring-br_military_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="commercial"
+                  formControlName="commercialScore"
+                  borderColorClass="border-br_commercial_score focus:ring-br_commercial_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="guild"
+                  formControlName="guildScore"
+                  borderColorClass="border-br_guild_score focus:ring-br_guild_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="city"
+                  formControlName="cityScore"
+                  borderColorClass="border-br_city_score focus:ring-br_city_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="leader"
+                  formControlName="leaderScore"
+                  borderColorClass="border-br_leader_score focus:ring-br_leader_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="coin"
+                  formControlName="coinScore"
+                  borderColorClass="border-br_coin_score focus:ring-br_coin_score"
+              ></seven-wonders-scorer-score-input-form>
+              <seven-wonders-scorer-score-input-form
+                  type="wonder"
+                  formControlName="wonderScore"
+                  borderColorClass="border-br_wonder_score focus:ring-br_wonder_score"
+              ></seven-wonders-scorer-score-input-form>
+            </div>
+            
+            <div formGroupName="scienceScore" class="mt-4">
+              <h3 class="mb-2">科学スコア</h3>
+              <div class="grid grid-cols-1 gap-2 smartphone:grid-cols-3 smartphone:gap-2 desktop:grid-cols-3 desktop:gap-3">
+                <seven-wonders-scorer-score-input-form
+                    type="compass"
+                    formControlName="compass"
+                    borderColorClass="border-br_science_score focus:ring-br_science_score"
+                ></seven-wonders-scorer-score-input-form>
+                <seven-wonders-scorer-score-input-form
+                    type="gear"
+                    formControlName="gear"
+                    borderColorClass="border-br_science_score focus:ring-br_science_score"
+                ></seven-wonders-scorer-score-input-form>
+                <seven-wonders-scorer-score-input-form
+                    type="tablet"
+                    formControlName="tablet"
+                    borderColorClass="border-br_science_score focus:ring-br_science_score"
+                ></seven-wonders-scorer-score-input-form>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button type="submit" 
+                      [disabled]="!updateScoreForm.valid"
+                      class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                登録
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="mt-5 sm:mt-6">
+          <button type="button"
+                  class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  (click)="closeModal()">
+            閉じる
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

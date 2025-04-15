@@ -9,6 +9,7 @@ import { ScoreListState } from './state/score-list.state';
 import { UserService } from './services/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserCardModule } from './components/user-card/user-card.component.module';
+import { ScoreUpdateModalModule } from './components/score-update-modal/score-update-modal.component.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { UserCardModule } from './components/user-card/user-card.component.modul
     CommonModule,
     ReactiveFormsModule,
     UserCardModule,
+    ScoreUpdateModalModule,
   ],
   exports: [],
   declarations: [TopComponent],
