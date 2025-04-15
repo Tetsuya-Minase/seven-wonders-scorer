@@ -1,6 +1,18 @@
-import { Component, forwardRef, input, OnInit } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  Host,
+  input,
+  OnInit,
+  Optional,
+  SkipSelf,
+} from '@angular/core';
 import { ScoreType } from './types/ScoreType';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlContainer,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'seven-wonders-scorer-score-input-form',
@@ -18,6 +30,7 @@ export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
   public borderColorClass = input.required<string>({
     alias: 'borderColorClass',
   });
+  public formControlName = input.required<string>({ alias: 'formControlName' });
   public typeLabel = '';
   public formId = '';
   public value = 0;
@@ -25,9 +38,26 @@ export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
   public onChange: (value: number) => void = () => undefined;
   public onTouched: () => void = () => undefined;
 
+  constructor(
+    @Optional()
+    @Host()
+    @SkipSelf()
+    private readonly controlContainer: ControlContainer
+  ) {}
+
   public ngOnInit() {
     this.formId = `${this.type()}Id`;
     this.#setTypeLabel(this.type());
+
+    console.log('controlContainer: ', this.controlContainer);
+    if (this.controlContainer && this.controlContainer.control) {
+      console.log('formControlName: ', this.formControlName());
+      const formGroup = this.controlContainer.control;
+      const control = formGroup.get(this.formControlName());
+      if (control) {
+        this.writeValue(control.value);
+      }
+    }
   }
 
   #setTypeLabel(type: ScoreType) {
@@ -80,5 +110,11 @@ export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
 
   public writeValue(value: number): void {
     this.value = value;
+  }
+
+  public onInputChange(value: number): void {
+    this.value = value;
+    this.onChange(this.value);
+    this.onTouched();
   }
 }
