@@ -15,15 +15,16 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'seven-wonders-scorer-score-input-form',
-  templateUrl: 'score-input-form.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScoreInputFormComponent),
-      multi: true,
-    },
-  ],
+    selector: 'seven-wonders-scorer-score-input-form',
+    templateUrl: 'score-input-form.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ScoreInputFormComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
   public type = input.required<ScoreType>({ alias: 'type' });

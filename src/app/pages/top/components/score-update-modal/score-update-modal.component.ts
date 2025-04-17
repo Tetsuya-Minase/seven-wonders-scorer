@@ -16,8 +16,9 @@ import { ScoreService } from '../../services/score.service';
 import { UpdateScoreForm } from './type';
 
 @Component({
-  selector: 'seven-wonders-scorer-score-update-modal',
-  templateUrl: 'score-update-modal.component.html',
+    selector: 'seven-wonders-scorer-score-update-modal',
+    templateUrl: 'score-update-modal.component.html',
+    standalone: false
 })
 export class ScoreUpdateModalComponent {
   @Output() closeModalEvent: EventEmitter<void> = new EventEmitter<void>();
