@@ -10,8 +10,9 @@ import {
 import type { Score } from '../../types/score';
 
 @Component({
-  selector: 'seven-wonders-scorer-user-card',
-  templateUrl: 'user-card.component.html',
+    selector: 'seven-wonders-scorer-user-card',
+    templateUrl: 'user-card.component.html',
+    standalone: false
 })
 export class UserCardComponent implements OnChanges, OnInit {
   @Input({ required: true }) score!: Score;

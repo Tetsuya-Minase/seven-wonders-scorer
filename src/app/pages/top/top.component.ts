@@ -4,8 +4,9 @@ import { UserService } from './services/user.service';
 import { NonNullableFormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'seven-wonders-scorer-top',
-  templateUrl: 'top.component.html',
+    selector: 'seven-wonders-scorer-top',
+    templateUrl: 'top.component.html',
+    standalone: false
 })
 export class TopComponent {
   public showModal = false;

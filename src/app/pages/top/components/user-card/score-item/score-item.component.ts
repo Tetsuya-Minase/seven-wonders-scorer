@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ScoreType } from './types/ScoreType';
 
 @Component({
-  selector: 'seven-wonders-scorer-score-item',
-  templateUrl: 'score-item.component.html',
+    selector: 'seven-wonders-scorer-score-item',
+    templateUrl: 'score-item.component.html',
+    standalone: false
 })
 export class ScoreItemComponent implements OnInit {
   @Input() public score = 0;
