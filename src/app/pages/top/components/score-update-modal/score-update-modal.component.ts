@@ -106,6 +106,7 @@ export class ScoreUpdateModalComponent {
         wonderScore: this.updateScoreForm.controls.wonderScore.value,
       }
     );
+    this.closeModal();
   }
 
   protected readonly FormControl = FormControl;
