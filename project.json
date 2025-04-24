@@ -15,6 +15,7 @@
         "outputPath": {
           "base": "dist/seven-wonders-scorer"
         },
+        "baseHref": "/seven-wonders-scorer/",
         "index": "./src/index.html",
         "polyfills": [
           "zone.js"
@@ -44,7 +45,8 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "baseHref": "/seven-wonders-scorer/"
         },
         "development": {
           "optimization": false,
