@@ -6,11 +6,11 @@ import { Subscription } from 'rxjs';
 import { RoomService } from './services/room.service';
 
 @Component({
-  selector: 'seven-wonders-scorer-top',
-  templateUrl: 'top.component.html',
+  selector: 'seven-wonders-scorer-score',
+  templateUrl: 'score.component.html',
   standalone: false,
 })
-export class TopComponent implements OnInit, OnDestroy {
+export class ScoreComponent implements OnInit, OnDestroy {
   public showModal = false;
   public username = '';
   public userForm = this.formBuilder.group({

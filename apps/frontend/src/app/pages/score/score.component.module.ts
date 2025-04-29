@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-
-import { TopComponent } from './top.component';
+import { ScoreComponent } from './score.component';
 import { RouterModule } from '@angular/router';
-import { topRoutes } from './top.routes';
+import { scoreRoutes } from './score.routes';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserCardModule } from './components/user-card/user-card.component.module';
@@ -13,14 +12,14 @@ import { RoomState } from './state/room.state';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(topRoutes),
+    RouterModule.forChild(scoreRoutes),
     CommonModule,
     ReactiveFormsModule,
     UserCardModule,
     ScoreUpdateModalModule,
   ],
   exports: [],
-  declarations: [TopComponent],
+  declarations: [ScoreComponent],
   providers: [WebSocketService, RoomService, RoomState],
 })
-export class TopModule {}
+export class ScoreModule {}

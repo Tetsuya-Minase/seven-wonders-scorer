@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
       {
         path: 'game',
         loadChildren: () =>
-          import('./pages/score/top.component.module').then((m) => m.TopModule),
+          import('./pages/score/score.component.module').then((m) => m.ScoreModule),
       },
     ],
   },
