@@ -33,10 +33,12 @@ export class ScoreComponent implements OnInit, OnDestroy {
     // ローカルストレージからルーム名とユーザー名を取得
     const roomName = localStorage.getItem('roomName');
     const username = localStorage.getItem('username');
-    
+    console.log('roomName:', roomName);
+    console.log('username:', username);
     if (!roomName || !username) {
+      console.error('ルーム名またはユーザー名が見つかりません');
       // ルーム名またはユーザー名がない場合はログイン画面にリダイレクト
-      this.router.navigate(['/seven-wonders-scorer']);
+      this.router.navigate(['/login']);
       return;
     }
     
@@ -149,7 +151,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
     this.webSocketService.disconnect();
     
     // ログイン画面にリダイレクト
-    this.router.navigate(['/seven-wonders-scorer']);
+    this.router.navigate(['/login']);
   }
 
   // エラー状態を確認するゲッター

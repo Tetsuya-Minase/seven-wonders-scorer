@@ -95,7 +95,7 @@ export class LoginComponent implements OnDestroy {
         localStorage.setItem('username', username);
         
         // トップページに遷移
-        this.router.navigate(['/seven-wonders-scorer/score']);
+        this.router.navigate(['/score']);
       },
       error: (error) => {
         console.error('ルーム参加エラー:', error);
