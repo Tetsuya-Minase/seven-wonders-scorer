@@ -1,0 +1,1 @@
+import{B as i,ha as r,ia as n,j as e}from"./chunk-HIRNLJZT.js";var d=(()=>{class o{static{this.\u0275fac=function(m){return new(m||o)}}static{this.\u0275mod=i({type:o})}static{this.\u0275inj=e({providers:[n],imports:[r.forChild([{path:"",loadComponent:()=>import("./chunk-OIYLSWCL.js").then(t=>t.LoginComponent)}])]})}}return o})();export{d as LoginModule};
