@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
-
-import { TopComponent } from './top.component';
+import { ScoreComponent } from './score.component';
 import { RouterModule } from '@angular/router';
-import { topRoutes } from './top.routes';
-import { ScoreService } from './services/score.service';
+import { scoreRoutes } from './score.routes';
 import { CommonModule } from '@angular/common';
-import { ScoreListState } from './state/score-list.state';
-import { UserService } from './services/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserCardModule } from './components/user-card/user-card.component.module';
 import { ScoreUpdateModalModule } from './components/score-update-modal/score-update-modal.component.module';
+import { WebSocketService } from '../../services/websocket.service';
+import { RoomService } from './services/room.service';
+import { RoomState } from './state/room.state';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(topRoutes),
+    RouterModule.forChild(scoreRoutes),
     CommonModule,
     ReactiveFormsModule,
     UserCardModule,
     ScoreUpdateModalModule,
   ],
   exports: [],
-  declarations: [TopComponent],
-  providers: [ScoreService, UserService, ScoreListState],
+  declarations: [ScoreComponent],
+  providers: [WebSocketService, RoomService, RoomState],
 })
-export class TopModule {}
+export class ScoreModule {}
