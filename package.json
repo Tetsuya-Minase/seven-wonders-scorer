@@ -5,7 +5,9 @@
   "scripts": {
     "nx": "nx",
     "ng": "ng",
-    "start": "nx serve",
+    "start": "nx run-many --target=serve --projects=seven-wonders-scorer,backend --parallel",
+    "start:backend": "nx serve backend",
+    "start:frontend": "nx serve backend",
     "build": "nx build",
     "build:prod": "nx build --prod",
     "test": "nx test",
