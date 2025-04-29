@@ -1,0 +1,74 @@
+@import 'tailwindcss';
+
+/* Tailwind CSS v4 のカスタム設定 */
+@theme {
+  /* 画面サイズの変数を定義 */
+  --breakpoint-smartphone: 375px;
+  --breakpoint-desktop: 1024px;
+
+  /* 幅の変数を定義 */
+  --width-sp_main_content: 375px;
+  --width-pc_main_content: 1024px;
+
+  /* カラー変数の定義 */
+  --color-text_black: #333333;
+  --color-border_black: #000000;
+  --color-bg_civilization_score: #448aff;
+  --color-br_civilization_score: #448aff;
+  --color-bg_military_score: #eb5757;
+  --color-br_military_score: #eb5757;
+  --color-bg_commercial_score: #f2c94c;
+  --color-br_commercial_score: #f2c94c;
+  --color-bg_science_score: #27ae60;
+  --color-br_science_score: #27ae60;
+  --color-bg_guild_score: #bb6bd9;
+  --color-br_guild_score: #bb6bd9;
+  --color-bg_city_score: #333333;
+  --color-br_city_score: #333333;
+  --color-bg_leader_score: #f5f5f5;
+  --color-br_leader_score: #f5f5f5;
+  --color-bg_wonder_score: #edb91b;
+  --color-br_wonder_score: #edb91b;
+  --color-bg_coin_score: #f5d67a;
+  --color-br_coin_score: #f5d67a;
+}
+
+/* スクリーンサイズの設定 */
+@screens {
+  smartphone: var(--breakpoint-smartphone);
+  desktop: var(--breakpoint-desktop);
+}
+
+/* その他のスタイル */
+.remove-arrow::-webkit-outer-spin-button,
+.remove-arrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.remove-arrow {
+  -moz-appearance: textfield;
+}
+
+/* Tailwind CSS v4 のユーティリティクラス拡張 */
+@layer utilities {
+  .w-sp_main_content {
+    width: var(--width-sp_main_content);
+  }
+  .w-pc_main_content {
+    width: var(--width-pc_main_content);
+  }
+  .text-text_black {
+    color: var(--color-text_black);
+  }
+  .border-border_black {
+    border-color: var(--color-border_black);
+  }
+  .bg-bg_civilization_score {
+    background-color: var(--color-bg_civilization_score);
+  }
+  .bg-bg_military_score {
+    background-color: var(--color-bg_military_score);
+  }
+  /* 他のユーティリティクラスも同様に定義 */
+}

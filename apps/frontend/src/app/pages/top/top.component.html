@@ -1,0 +1,43 @@
+<ul class="grid grid-cols-1 desktop:grid-cols-2 gap-2 desktop:gap-4">
+  <li *ngFor="let score of scores">
+    <seven-wonders-scorer-user-card
+      [score]="score"
+      (openModalEvent)="openModal($event)"
+    ></seven-wonders-scorer-user-card>
+  </li>
+</ul>
+
+<!-- ユーザー追加フォーム -->
+<form [formGroup]="userForm" (ngSubmit)="addUser()" class="mt-4">
+  <div class="flex flex-col">
+    <div class="flex gap-2">
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="ユーザー名を入力"
+        class="border border-solid rounded p-2 flex-grow placeholder:text-gray-400"
+        [ngClass]="{
+          'border-red-500': isUsernameInvalid,
+          'border-border_black': !isUsernameInvalid,
+        }"
+        required
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+      >
+        追加
+      </button>
+    </div>
+    <!-- エラーメッセージ表示 -->
+    <div *ngIf="isUsernameInvalid" class="text-red-500 text-sm mt-1">
+      ユーザー名を入力して下さい。
+    </div>
+  </div>
+</form>
+
+<seven-wonders-scorer-score-update-modal
+  [showModal]="showModal"
+  [username]="username"
+  (closeModalEvent)="closeModal()"
+></seven-wonders-scorer-score-update-modal>
