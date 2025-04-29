@@ -1,3 +1,18 @@
+<!-- ルーム情報ヘッダー -->
+<div class="bg-gray-100 p-4 mb-4 rounded-lg flex justify-between items-center">
+  <div>
+    <h2 class="text-lg font-semibold">ルーム: {{ roomName }}</h2>
+    <p class="text-sm text-gray-600">ユーザー名: {{ currentUsername }}</p>
+  </div>
+  <button
+    (click)="logout()"
+    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
+  >
+    ログアウト
+  </button>
+</div>
+
+<!-- スコアカードリスト -->
 <ul class="grid grid-cols-1 desktop:grid-cols-2 gap-2 desktop:gap-4">
   <li *ngFor="let score of scores">
     <seven-wonders-scorer-user-card

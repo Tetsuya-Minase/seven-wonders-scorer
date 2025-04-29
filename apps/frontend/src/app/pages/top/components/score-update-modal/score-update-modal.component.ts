@@ -12,7 +12,7 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { ScoreService } from '../../services/score.service';
+import { RoomService } from '../../services/room.service';
 import { UpdateScoreForm } from './type';
 
 @Component({
@@ -28,7 +28,7 @@ export class ScoreUpdateModalComponent {
   public showModal = input.required<boolean>({ alias: 'showModal' });
 
   public constructor(
-    private readonly scoreService: ScoreService,
+    private readonly roomService: RoomService,
     private readonly formBuilder: NonNullableFormBuilder,
     private readonly destroyRef: DestroyRef,
   ) {
@@ -56,7 +56,7 @@ export class ScoreUpdateModalComponent {
       // ユーザー名が変更されたときに、そのユーザーの現在のスコアを取得してフォームに設定する
       const currentUsername = this.username();
       if (currentUsername) {
-        const userScore = this.scoreService.getScoreByUsername(currentUsername);
+        const userScore = this.roomService.getScoreByUsername(currentUsername);
         if (userScore) {
           this.updateScoreForm.patchValue({
             civilizationScore: userScore.civilScore,
@@ -86,7 +86,7 @@ export class ScoreUpdateModalComponent {
     if (!this.updateScoreForm.valid) {
       throw new Error(`updateScoreForm is invalid`);
     }
-    this.scoreService.updateScore(
+    this.roomService.updateScore(
       this.updateScoreForm.controls.username.value,
       {
         civilScore: this.updateScoreForm.controls.civilizationScore.value,
