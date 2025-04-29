@@ -10,7 +10,8 @@ export const getUserCards = () => cy.get('seven-wonders-scorer-user-card');
 export const getUserForm = () => cy.get('form');
 
 // ユーザー名入力フィールドを取得するヘルパー関数
-export const getUsernameInput = () => cy.get('input[formControlName="username"]');
+export const getUsernameInput = () =>
+  cy.get('input[formControlName="username"]');
 
 // 追加ボタンを取得するヘルパー関数
 // より具体的なセレクターを使用し、first()で最初の一致する要素だけを選択
