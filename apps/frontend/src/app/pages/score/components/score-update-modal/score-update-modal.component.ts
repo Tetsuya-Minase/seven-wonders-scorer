@@ -11,14 +11,17 @@ import {
   FormGroup,
   NonNullableFormBuilder,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { RoomService } from '../../services/room.service';
 import { UpdateScoreForm } from './type';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'seven-wonders-scorer-score-update-modal',
   templateUrl: 'score-update-modal.component.html',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class ScoreUpdateModalComponent {
   @Output() closeModalEvent: EventEmitter<void> = new EventEmitter<void>();
