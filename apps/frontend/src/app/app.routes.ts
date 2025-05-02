@@ -3,13 +3,13 @@ import { Route } from '@angular/router';
 export const appRoutes: Route[] = [
   {
     path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login.component.module').then((m) => m.LoginModule),
+    loadComponent: () =>
+      import('./pages/login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: 'score',
-    loadChildren: () =>
-      import('./pages/score/score.component.module').then((m) => m.ScoreModule),
+    loadComponent: () =>
+      import('./pages/score/score.component').then((m) => m.ScoreComponent),
   },
   {
     path: '**',

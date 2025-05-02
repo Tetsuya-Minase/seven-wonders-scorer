@@ -1,14 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { WebSocketService } from '../../services/websocket.service';
 import { Subscription } from 'rxjs';
 import { RoomService } from './services/room.service';
+import { CommonModule } from '@angular/common';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { ScoreUpdateModalComponent } from './components/score-update-modal/score-update-modal.component';
 
 @Component({
   selector: 'seven-wonders-scorer-score',
   templateUrl: 'score.component.html',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, UserCardComponent, ScoreUpdateModalComponent],
 })
 export class ScoreComponent implements OnInit, OnDestroy {
   public showModal = false;

@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ScoreType } from './types/ScoreType';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'seven-wonders-scorer-score-item',
   templateUrl: 'score-item.component.html',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ScoreItemComponent implements OnInit {
   @Input() public score = 0;
