@@ -7,12 +7,14 @@ import { RoomService } from './services/room.service';
 import { CommonModule } from '@angular/common';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ScoreUpdateModalComponent } from './components/score-update-modal/score-update-modal.component';
+import { RoomState } from './state/room.state';
 
 @Component({
   selector: 'seven-wonders-scorer-score',
   templateUrl: 'score.component.html',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, UserCardComponent, ScoreUpdateModalComponent],
+  providers: [RoomService, RoomState]
 })
 export class ScoreComponent implements OnInit, OnDestroy {
   public showModal = false;

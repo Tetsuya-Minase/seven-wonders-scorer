@@ -12,7 +12,10 @@ import {
   ControlContainer,
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'seven-wonders-scorer-score-input-form',
@@ -24,7 +27,8 @@ import {
       multi: true,
     },
   ],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
 })
 export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
   public type = input.required<ScoreType>({ alias: 'type' });
@@ -113,9 +117,10 @@ export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
     this.value = value;
   }
 
-  public onInputChange(value: number): void {
-    this.value = value;
-    this.onChange(this.value);
+  public onInputChange(value: any): void {
+    const numValue = Number(value);
+    this.value = numValue;
+    this.onChange(numValue);
     this.onTouched();
   }
 }

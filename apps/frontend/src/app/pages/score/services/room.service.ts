@@ -7,7 +7,9 @@ import { ScoreState } from '../state/score.state';
  * ルーム操作サービス
  * WebSocketを使用してルームの操作を行う
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RoomService {
   readonly #state;
 
