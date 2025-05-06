@@ -16,12 +16,13 @@ import {
 import { RoomService } from '../../services/room.service';
 import { UpdateScoreForm } from './type';
 import { CommonModule } from '@angular/common';
+import { ScoreInputFormComponent } from './score-input-form/score-input-form.component';
 
 @Component({
   selector: 'seven-wonders-scorer-score-update-modal',
   templateUrl: 'score-update-modal.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ScoreInputFormComponent],
 })
 export class ScoreUpdateModalComponent {
   @Output() closeModalEvent: EventEmitter<void> = new EventEmitter<void>();
