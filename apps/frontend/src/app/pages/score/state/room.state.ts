@@ -20,7 +20,9 @@ export interface RoomStateType {
 /**
  * ルーム状態を管理するクラス
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RoomState implements SignalState<RoomStateType | null> {
   /**
    * ルーム状態
