@@ -1,0 +1,67 @@
+name: Deploy Frontend to Firebase
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/frontend/**'
+      - 'package.json'
+      - 'nx.json'
+      - '.github/workflows/deploy-frontend.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for Nx affected commands
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Use Nx cache
+      - name: Nx Cache
+        uses: nrwl/nx-set-shas@v3
+
+      - name: Build
+        run: npx nx build seven-wonders-scorer --configuration=production
+
+      # Create Firebase config files if they don't exist
+      - name: Create firebase.json if not exists
+        run: |
+          if [ ! -f firebase.json ]; then
+            echo '{
+              "hosting": {
+                "public": "dist/seven-wonders-scorer",
+                "ignore": [
+                  "firebase.json",
+                  "**/.*",
+                  "**/node_modules/**"
+                ],
+                "rewrites": [
+                  {
+                    "source": "**",
+                    "destination": "/index.html"
+                  }
+                ]
+              }
+            }' > firebase.json
+          fi
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          channelId: live
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+          target: seven-wonders-scorer # Optional specific target
