@@ -10,5 +10,8 @@ export default defineConfig({
     fixturesFolder: 'src/fixtures',
     videosFolder: '../../dist/cypress/e2e/videos',
     screenshotsFolder: '../../dist/cypress/e2e/screenshots',
+    // Please ensure you use `cy.origin()` when navigating between domains and remove this option.
+    // See https://docs.cypress.io/app/references/migration-guide#Changes-to-cyorigin
+    injectDocumentDomain: true,
   },
 });

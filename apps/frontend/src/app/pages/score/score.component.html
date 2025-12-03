@@ -7,19 +7,21 @@
   <button
     (click)="logout()"
     class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
-  >
+    >
     ログアウト
   </button>
 </div>
 
 <!-- スコアカードリスト -->
 <ul class="grid grid-cols-1 desktop:grid-cols-2 gap-2 desktop:gap-4">
-  <li *ngFor="let score of scores">
-    <seven-wonders-scorer-user-card
-      [score]="score"
-      (openModalEvent)="openModal($event)"
-    ></seven-wonders-scorer-user-card>
-  </li>
+  @for (score of scores; track score) {
+    <li>
+      <seven-wonders-scorer-user-card
+        [score]="score"
+        (openModalEvent)="openModal($event)"
+      ></seven-wonders-scorer-user-card>
+    </li>
+  }
 </ul>
 
 <!-- ユーザー追加フォーム -->
@@ -36,18 +38,20 @@
           'border-border_black': !isUsernameInvalid,
         }"
         required
-      />
+        />
       <button
         type="submit"
         class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-      >
+        >
         追加
       </button>
     </div>
     <!-- エラーメッセージ表示 -->
-    <div *ngIf="isUsernameInvalid" class="text-red-500 text-sm mt-1">
-      ユーザー名を入力して下さい。
-    </div>
+    @if (isUsernameInvalid) {
+      <div class="text-red-500 text-sm mt-1">
+        ユーザー名を入力して下さい。
+      </div>
+    }
   </div>
 </form>
 
