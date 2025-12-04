@@ -18,7 +18,7 @@ import { RoomsService } from './rooms.service';
   },
 })
 export class RoomsGateway {
-  @WebSocketServer() server: Server;
+  @WebSocketServer() server!: Server;
   private readonly logger = new Logger(RoomsGateway.name);
 
   constructor(private readonly roomsService: RoomsService) {}

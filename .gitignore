@@ -40,9 +40,6 @@ Thumbs.db
 
 .angular
 
-.nx/cache
-.nx/workspace-data
-
 # AI rules
 .clinerules
 .cursor/
