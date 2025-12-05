@@ -51,8 +51,8 @@ export class RoomService {
    * スコアデータを取得する
    * @returns スコアデータの配列
    */
-  public getScores(): ScoreState[] {
-    return this.roomState.getScores();
+  public get scores(): ScoreState[] {
+    return this.roomState.scores;
   }
 
   /**
@@ -61,7 +61,6 @@ export class RoomService {
    * @returns スコアデータ
    */
   public getScoreByUsername(username: string): ScoreState | undefined {
-    const scores = this.roomState.getScores();
-    return scores.find(score => score.username === username);
+    return this.roomState.scores.find(score => score.username === username);
   }
 }

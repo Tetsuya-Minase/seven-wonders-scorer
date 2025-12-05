@@ -1,5 +1,5 @@
 /**
- * Score state
+ * Score state (computed scores with sum)
  */
 export type ScoreState = Readonly<{
   username: string;
@@ -9,6 +9,7 @@ export type ScoreState = Readonly<{
     gear: number;
     compass: number;
     tablet: number;
+    sum: number;
   }>;
   commercialScore: number;
   guildScore: number;
@@ -16,6 +17,7 @@ export type ScoreState = Readonly<{
   leaderScore: number;
   coinScore: number;
   wonderScore: number;
+  sum: number;
 }>;
 
 /**

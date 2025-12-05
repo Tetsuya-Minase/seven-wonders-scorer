@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, afterNextRender } from '@angular/core';
 import { Router } from '@angular/router';
 import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { WebSocketService } from '../../services/websocket.service';
@@ -14,7 +14,6 @@ import { RoomState } from './state/room.state';
   templateUrl: 'score.component.html',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, UserCardComponent, ScoreUpdateModalComponent],
-  providers: [RoomService, RoomState]
 })
 export class ScoreComponent implements OnInit, OnDestroy {
   public showModal = false;
@@ -30,10 +29,16 @@ export class ScoreComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly roomService: RoomService,
+    private readonly roomState: RoomState,
     private readonly formBuilder: NonNullableFormBuilder,
     private readonly webSocketService: WebSocketService,
     private readonly router: Router,
-  ) {}
+  ) {
+    // 変更検知サイクル完了後にルームに参加
+    afterNextRender(() => {
+      this.roomState.initialize();
+    });
+  }
   
   ngOnInit(): void {
     // ローカルストレージからルーム名とユーザー名を取得
@@ -101,51 +106,12 @@ export class ScoreComponent implements OnInit, OnDestroy {
     this.username = '';
   }
 
+  /**
+   * スコアデータを取得（RoomStateのcomputedシグナルを使用）
+   * computedシグナルにより、同じ参照が返されるためNG0100エラーが解消される
+   */
   public get scores() {
-    const scores = this.roomService.getScores();
-    
-    // ScoreStateの型をScoreの型に変換
-    return scores.map(score => {
-      // scienceScoreの合計を計算
-      const scienceSet = Math.min(
-        score.scienceScore.compass,
-        score.scienceScore.gear,
-        score.scienceScore.tablet,
-      );
-      const scienceScoreSum =
-        scienceSet * 7 +
-        (score.scienceScore.gear > 0
-          ? score.scienceScore.gear * score.scienceScore.gear
-          : 0) +
-        (score.scienceScore.compass > 0
-          ? score.scienceScore.compass * score.scienceScore.compass
-          : 0) +
-        (score.scienceScore.tablet > 0
-          ? score.scienceScore.tablet * score.scienceScore.tablet
-          : 0);
-      
-      // 全体の合計を計算
-      const scoreSum = 
-        score.civilScore +
-        score.militaryScore +
-        scienceScoreSum +
-        score.commercialScore +
-        score.guildScore +
-        score.cityScore +
-        score.leaderScore +
-        score.coinScore +
-        score.wonderScore;
-      
-      // Scoreの型に変換して返す
-      return {
-        ...score,
-        scienceScore: {
-          ...score.scienceScore,
-          sum: scienceScoreSum,
-        },
-        sum: scoreSum,
-      };
-    });
+    return this.roomState.scores;
   }
   
   public logout(): void {
