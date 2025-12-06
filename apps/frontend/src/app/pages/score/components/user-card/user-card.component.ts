@@ -8,14 +8,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import type { Score } from '../../types/score';
-import { CommonModule } from '@angular/common';
+
 import { ScoreItemComponent } from './score-item/score-item.component';
 
 @Component({
   selector: 'seven-wonders-scorer-user-card',
   templateUrl: 'user-card.component.html',
   standalone: true,
-  imports: [CommonModule, ScoreItemComponent],
+  imports: [ScoreItemComponent],
 })
 export class UserCardComponent implements OnChanges, OnInit {
   @Input({ required: true }) score!: Score;

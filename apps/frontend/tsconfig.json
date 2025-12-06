@@ -1,9 +1,9 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "esModuleInterop": true,
+    "outDir": "../../dist/out-tsc",
+    "types": ["jest", "node"],
     "useDefineForClassFields": false,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -17,9 +17,6 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./tsconfig.editor.json"
     }
   ],
   "angularCompilerOptions": {
@@ -27,6 +24,5 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
-  "extends": "../../tsconfig.base.json"
+  }
 }

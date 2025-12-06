@@ -33,12 +33,6 @@
   --color-br_coin_score: #f5d67a;
 }
 
-/* スクリーンサイズの設定 */
-@screens {
-  smartphone: var(--breakpoint-smartphone);
-  desktop: var(--breakpoint-desktop);
-}
-
 /* その他のスタイル */
 .remove-arrow::-webkit-outer-spin-button,
 .remove-arrow::-webkit-inner-spin-button {

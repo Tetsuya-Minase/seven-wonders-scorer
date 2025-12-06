@@ -1,9 +1,11 @@
-/* eslint-disable */
+import type { Config } from 'jest';
+
 export default {
-  displayName: 'seven-wonders-scorer',
+  displayName: 'frontend',
   preset: '../../jest.preset.js',
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/seven-wonders-scorer',
+  coverageDirectory: '../../coverage/apps/frontend',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
@@ -19,8 +21,4 @@ export default {
     'jest-preset-angular/build/serializers/ng-snapshot',
     'jest-preset-angular/build/serializers/html-comment',
   ],
-  testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)',
-    '<rootDir>/src/**/*(*.)@(spec|test).[jt]s?(x)',
-  ],
-};
+} as Config;

@@ -1,3 +1,5 @@
+import type { Config } from 'jest';
+
 export default {
   displayName: 'backend',
   preset: '../../jest.preset.js',
@@ -7,4 +9,4 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/backend',
-};
+} as Config;

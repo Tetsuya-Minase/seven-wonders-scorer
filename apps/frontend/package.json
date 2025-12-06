@@ -1,0 +1,45 @@
+{
+  "name": "@seven-wonders/frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "dev": "ng serve",
+    "build": "ng build",
+    "build:prod": "ng build --configuration production",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "e2e": "cypress run",
+    "e2e:open": "cypress open",
+    "lint": "eslint \"src/**/*.ts\"",
+    "serve-static": "npx serve dist/seven-wonders-scorer -p 4200",
+    "deploy": "ng deploy"
+  },
+  "dependencies": {
+    "@angular/animations": "21.0.2",
+    "@angular/common": "21.0.2",
+    "@angular/compiler": "21.0.2",
+    "@angular/core": "21.0.2",
+    "@angular/forms": "21.0.2",
+    "@angular/platform-browser": "21.0.2",
+    "@angular/platform-browser-dynamic": "21.0.2",
+    "@angular/router": "21.0.2",
+    "rxjs": "7.8.0",
+    "socket.io-client": "4.8.1",
+    "@tailwindcss/postcss": "4.1.4",
+    "tailwindcss": "4.1.4",
+    "tslib": "2.8.1",
+    "zone.js": "0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "21.0.2",
+    "@angular/cli": "21.0.2",
+    "@angular/compiler-cli": "21.0.2",
+    "@types/jest": "30.0.0",
+    "@types/node": "18.16.9",
+    "angular-cli-ghpages": "2.0.2",
+    "cypress": "15.7.1",
+    "jest": "30.0.0",
+    "jest-preset-angular": "14.5.2"
+  }
+}
