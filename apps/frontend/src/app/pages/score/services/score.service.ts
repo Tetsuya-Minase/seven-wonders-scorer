@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScoreListState } from '../state/score-list.state';
+import { ScoreStateManager } from '../state/score-state';
 import { Score } from '../types/score';
 
 export type UpdateScore = Readonly<{
@@ -18,27 +18,29 @@ export type UpdateScore = Readonly<{
   wonderScore: number;
 }>;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ScoreService {
   readonly #state;
-  constructor(private readonly scoreListState: ScoreListState) {
-    this.#state = scoreListState.asReadonly();
+  constructor(private readonly scoreStateManager: ScoreStateManager) {
+    this.#state = scoreStateManager.asReadonly();
   }
 
   public updateScore(username: string, score: UpdateScore) {
-    this.scoreListState.updateCivilScore(username, score.civilScore);
-    this.scoreListState.updateMilitaryScore(username, score.militaryScore);
-    this.scoreListState.updateScienceScore(username, {
+    this.scoreStateManager.updateCivilScore(username, score.civilScore);
+    this.scoreStateManager.updateMilitaryScore(username, score.militaryScore);
+    this.scoreStateManager.updateScienceScore(username, {
       gear: score.scienceScore.gear,
       compass: score.scienceScore.compass,
       tablet: score.scienceScore.tablet,
     });
-    this.scoreListState.updateCommercialScore(username, score.commercialScore);
-    this.scoreListState.updateGuildScore(username, score.guildScore);
-    this.scoreListState.updateCityScore(username, score.cityScore);
-    this.scoreListState.updateLeaderScore(username, score.leaderScore);
-    this.scoreListState.updateCoinScore(username, score.coinScore);
-    this.scoreListState.updateWonderScore(username, score.wonderScore);
+    this.scoreStateManager.updateCommercialScore(username, score.commercialScore);
+    this.scoreStateManager.updateGuildScore(username, score.guildScore);
+    this.scoreStateManager.updateCityScore(username, score.cityScore);
+    this.scoreStateManager.updateLeaderScore(username, score.leaderScore);
+    this.scoreStateManager.updateCoinScore(username, score.coinScore);
+    this.scoreStateManager.updateWonderScore(username, score.wonderScore);
   }
 
   public getScoreByUsername(username: string): Score | undefined {

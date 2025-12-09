@@ -1,14 +1,57 @@
 import { Injectable, signal } from '@angular/core';
 import { SignalState } from '../../../types/signal-state';
-import { ScoreState, ScoreType } from './score.state';
 
-export type State = {
+/**
+ * Score state (computed scores with sum)
+ */
+export type ScoreState = Readonly<{
+  username: string;
+  civilScore: number;
+  militaryScore: number;
+  scienceScore: Readonly<{
+    gear: number;
+    compass: number;
+    tablet: number;
+  }>;
+  commercialScore: number;
+  guildScore: number;
+  cityScore: number;
+  leaderScore: number;
+  coinScore: number;
+  wonderScore: number;
+}>;
+export type Score = ScoreState & Readonly<{
+  scienceScore: Readonly<{
+    sum: number;
+  }>;
+  sum: number;
+}>;
+
+/**
+ * Score type
+ */
+export const ScoreType = {
+  Civilization: 'civilScore',
+  Military: 'militaryScore',
+  Science: 'scienceScore',
+  Commercial: 'commercialScore',
+  Guild: 'guildScore',
+  City: 'cityScore',
+  Leader: 'leaderScore',
+  Coin: 'coinScore',
+  Wonder: 'wonderScore',
+} as const;
+export type ScoreType = (typeof ScoreType)[keyof typeof ScoreType];
+
+type State = {
   scores: ScoreState[];
 };
 
-@Injectable()
-export class ScoreListState implements SignalState<State> {
-  #scoreList = signal<ScoreState[]>([]);
+@Injectable({
+  providedIn: 'root'
+})
+export class ScoreStateManager implements SignalState<State> {
+  #scoreStateList = signal<ScoreState[]>([]);
 
   /**
    * add new user to score list
@@ -31,7 +74,7 @@ export class ScoreListState implements SignalState<State> {
       coinScore: 0,
       wonderScore: 0,
     };
-    this.#scoreList.update((scores) => [...scores, newUser]);
+    this.#scoreStateList.update((scores) => [...scores, newUser]);
   }
 
   /**
@@ -39,7 +82,7 @@ export class ScoreListState implements SignalState<State> {
    * @param username target username
    */
   public removeUser(username: string): void {
-    this.#scoreList.update((scores) => {
+    this.#scoreStateList.update((scores) => {
       return scores.filter((score) => score.username !== username);
     });
   }
@@ -138,7 +181,7 @@ export class ScoreListState implements SignalState<State> {
    */
   public asReadonly() {
     return {
-      scores: this.#scoreList.asReadonly(),
+      scores: this.#scoreStateList.asReadonly(),
     };
   }
 
@@ -162,7 +205,7 @@ export class ScoreListState implements SignalState<State> {
           scoreType: typeof ScoreType.Science;
         }>,
   ): void {
-    this.#scoreList.update((scores) => {
+    this.#scoreStateList.update((scores) => {
       return scores.map((s) => {
         if (s.username === username) {
           if (data.scoreType === ScoreType.Science) {

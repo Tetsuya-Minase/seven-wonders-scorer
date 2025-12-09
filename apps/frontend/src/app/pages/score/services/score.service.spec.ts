@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ScoreService } from './score.service';
-import { ScoreListState } from '../state/score-list.state';
+import { ScoreStateManager } from '../state/score-state';
 import { SIGNAL } from '@angular/core/primitives/signals';
 import { signal } from '@angular/core';
 
@@ -10,7 +10,7 @@ describe('ScoreService', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        providers: [ScoreService, { provide: ScoreListState }],
+        providers: [ScoreService, { provide: ScoreStateManager }],
       });
       service = TestBed.inject(ScoreService);
     });
@@ -21,24 +21,24 @@ describe('ScoreService', () => {
 
   describe('updateScore', () => {
     let service: ScoreService;
-    let scoreListStateMock: ScoreListState;
+    let scoreListStateMock: ScoreStateManager;
 
     beforeEach(() => {
-      jest.spyOn(ScoreListState.prototype, 'updateCivilScore');
-      jest.spyOn(ScoreListState.prototype, 'updateMilitaryScore');
-      jest.spyOn(ScoreListState.prototype, 'updateCityScore');
-      jest.spyOn(ScoreListState.prototype, 'updateGuildScore');
-      jest.spyOn(ScoreListState.prototype, 'updateCommercialScore');
-      jest.spyOn(ScoreListState.prototype, 'updateScienceScore');
-      jest.spyOn(ScoreListState.prototype, 'updateLeaderScore');
-      jest.spyOn(ScoreListState.prototype, 'updateCoinScore');
-      jest.spyOn(ScoreListState.prototype, 'updateWonderScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateCivilScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateMilitaryScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateCityScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateGuildScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateCommercialScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateScienceScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateLeaderScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateCoinScore');
+      jest.spyOn(ScoreStateManager.prototype, 'updateWonderScore');
 
-      scoreListStateMock = new ScoreListState();
+      scoreListStateMock = new ScoreStateManager();
       TestBed.configureTestingModule({
         providers: [
           ScoreService,
-          { provide: ScoreListState, useValue: scoreListStateMock },
+          { provide: ScoreStateManager, useValue: scoreListStateMock },
         ],
       });
       service = TestBed.inject(ScoreService);
@@ -116,10 +116,10 @@ describe('ScoreService', () => {
 
   describe('getScore', () => {
     let service: ScoreService;
-    let scoreListStateMock: ScoreListState;
+    let scoreListStateMock: ScoreStateManager;
 
     beforeEach(() => {
-      jest.spyOn(ScoreListState.prototype, 'asReadonly').mockReturnValue({
+      jest.spyOn(ScoreStateManager.prototype, 'asReadonly').mockReturnValue({
         scores: signal([
           {
             username: 'TestUser',
@@ -140,11 +140,11 @@ describe('ScoreService', () => {
         ]),
       });
 
-      scoreListStateMock = new ScoreListState();
+      scoreListStateMock = new ScoreStateManager();
       TestBed.configureTestingModule({
         providers: [
           ScoreService,
-          { provide: ScoreListState, useValue: scoreListStateMock },
+          { provide: ScoreStateManager, useValue: scoreListStateMock },
         ],
       });
       service = TestBed.inject(ScoreService);

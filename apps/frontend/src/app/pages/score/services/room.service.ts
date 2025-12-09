@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from '../../../services/websocket.service';
 import { RoomState } from '../state/room.state';
-import { ScoreState } from '../state/score.state';
 
 /**
  * ルーム操作サービス
@@ -45,22 +44,5 @@ export class RoomService {
    */
   public updateScore(username: string, score: any): void {
     this.roomState.updateScore(username, score);
-  }
-
-  /**
-   * スコアデータを取得する
-   * @returns スコアデータの配列
-   */
-  public get scores(): ScoreState[] {
-    return this.roomState.scores;
-  }
-
-  /**
-   * ユーザー名からスコアデータを取得する
-   * @param username ユーザー名
-   * @returns スコアデータ
-   */
-  public getScoreByUsername(username: string): ScoreState | undefined {
-    return this.roomState.scores.find(score => score.username === username);
   }
 }

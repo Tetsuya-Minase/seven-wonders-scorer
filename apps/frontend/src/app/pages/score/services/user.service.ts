@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ScoreListState } from '../state/score-list.state';
+import { ScoreStateManager } from '../state/score-state';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
-  constructor(private readonly scoreListState: ScoreListState) {}
+  constructor(private readonly scoreListState: ScoreStateManager) {}
 
   public addUser(username: string): void {
     this.scoreListState.addUser(username);
