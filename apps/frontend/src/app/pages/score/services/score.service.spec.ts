@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ScoreService } from './score.service';
 import { ScoreStateManager } from '../state/score-state';
-import { SIGNAL } from '@angular/core/primitives/signals';
 import { signal } from '@angular/core';
 
 describe('ScoreService', () => {
