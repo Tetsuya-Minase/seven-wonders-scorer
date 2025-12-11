@@ -1,15 +1,30 @@
-import { Injectable } from '@angular/core';
-import { ScoreListState } from '../state/score-list.state';
+import { inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { ScoreActions } from '../+state';
 
-@Injectable()
+/**
+ * UserService - NgRx Facade for user management
+ * Handles adding and removing users from the score tracking system
+ */
+@Injectable({
+  providedIn: 'root',
+})
 export class UserService {
-  constructor(private readonly scoreListState: ScoreListState) {}
+  private readonly store = inject(Store);
 
+  /**
+   * Add a new user to the score tracking system
+   * @param username unique username for the user
+   */
   public addUser(username: string): void {
-    this.scoreListState.addUser(username);
+    this.store.dispatch(ScoreActions.addUser({ username }));
   }
 
+  /**
+   * Remove a user from the score tracking system
+   * @param username username of the user to remove
+   */
   public removeUser(username: string): void {
-    this.scoreListState.removeUser(username);
+    this.store.dispatch(ScoreActions.removeUser({ username }));
   }
 }

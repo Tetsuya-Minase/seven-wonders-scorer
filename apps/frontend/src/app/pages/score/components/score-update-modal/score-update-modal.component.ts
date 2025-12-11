@@ -15,8 +15,8 @@ import {
 } from '@angular/forms';
 import { RoomService } from '../../services/room.service';
 import { UpdateScoreForm } from './type';
-
 import { ScoreInputFormComponent } from './score-input-form/score-input-form.component';
+import { ScoreService } from '../../services/score.service';
 
 @Component({
   selector: 'seven-wonders-scorer-score-update-modal',
@@ -33,6 +33,7 @@ export class ScoreUpdateModalComponent {
 
   public constructor(
     private readonly roomService: RoomService,
+    private readonly scoreService: ScoreService,
     private readonly formBuilder: NonNullableFormBuilder,
     private readonly destroyRef: DestroyRef,
   ) {
@@ -54,13 +55,12 @@ export class ScoreUpdateModalComponent {
     });
 
     effect(() => {
-      console.log('username: ', this.username());
       this.updateScoreForm.patchValue({ username: this.username() });
 
       // ユーザー名が変更されたときに、そのユーザーの現在のスコアを取得してフォームに設定する
       const currentUsername = this.username();
       if (currentUsername) {
-        const userScore = this.roomService.getScoreByUsername(currentUsername);
+        const userScore = this.scoreService.getScoreByUsername(currentUsername);
         if (userScore) {
           this.updateScoreForm.patchValue({
             civilizationScore: userScore.civilScore,

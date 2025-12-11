@@ -1,5 +1,11 @@
 /**
- * Score state (computed scores with sum)
+ * Score state type definitions
+ * These types are shared between the old Signal-based implementation
+ * and the new NgRx-based implementation
+ */
+
+/**
+ * Score state (raw scores without computed sums)
  */
 export type ScoreState = Readonly<{
   username: string;
@@ -9,7 +15,6 @@ export type ScoreState = Readonly<{
     gear: number;
     compass: number;
     tablet: number;
-    sum: number;
   }>;
   commercialScore: number;
   guildScore: number;
@@ -17,11 +22,10 @@ export type ScoreState = Readonly<{
   leaderScore: number;
   coinScore: number;
   wonderScore: number;
-  sum: number;
 }>;
 
 /**
- * Score type
+ * Score type constants
  */
 export const ScoreType = {
   Civilization: 'civilScore',
@@ -34,4 +38,5 @@ export const ScoreType = {
   Coin: 'coinScore',
   Wonder: 'wonderScore',
 } as const;
+
 export type ScoreType = (typeof ScoreType)[keyof typeof ScoreType];
