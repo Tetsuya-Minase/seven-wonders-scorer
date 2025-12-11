@@ -54,9 +54,7 @@ export class ScoreInputFormComponent implements ControlValueAccessor, OnInit {
     this.formId = `${this.type()}Id`;
     this.#setTypeLabel(this.type());
 
-    console.log('controlContainer: ', this.controlContainer);
     if (this.controlContainer && this.controlContainer.control) {
-      console.log('formControlName: ', this.formControlName());
       const formGroup = this.controlContainer.control;
       const control = formGroup.get(this.formControlName());
       if (control) {

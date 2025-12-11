@@ -46,8 +46,6 @@ export class ScoreComponent implements OnInit, OnDestroy {
     // ローカルストレージからルーム名とユーザー名を取得
     const roomName = localStorage.getItem('roomName');
     const username = localStorage.getItem('username');
-    console.log('roomName:', roomName);
-    console.log('username:', username);
     if (!roomName || !username) {
       console.error('ルーム名またはユーザー名が見つかりません');
       // ルーム名またはユーザー名がない場合はログイン画面にリダイレクト
@@ -113,7 +111,6 @@ export class ScoreComponent implements OnInit, OnDestroy {
    * computedシグナルにより、同じ参照が返されるためNG0100エラーが解消される
    */
   public get scores() {
-    console.log('score: ', this.scoreService.getScore());
     return this.scoreService.getScore();
   }
   

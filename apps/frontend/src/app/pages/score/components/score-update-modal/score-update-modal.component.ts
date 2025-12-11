@@ -55,7 +55,6 @@ export class ScoreUpdateModalComponent {
     });
 
     effect(() => {
-      console.log('username: ', this.username());
       this.updateScoreForm.patchValue({ username: this.username() });
 
       // ユーザー名が変更されたときに、そのユーザーの現在のスコアを取得してフォームに設定する
