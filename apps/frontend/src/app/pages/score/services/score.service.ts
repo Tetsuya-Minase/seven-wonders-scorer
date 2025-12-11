@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, Signal } from '@angular/core';
 import { ScoreStateManager } from '../state/score-state';
 import { Score } from '../types/score';
+import { WebSocketService } from '../../../services/websocket.service';
 
 export type UpdateScore = Readonly<{
   civilScore: number;
@@ -23,8 +24,26 @@ export type UpdateScore = Readonly<{
 })
 export class ScoreService {
   readonly #state;
-  constructor(private readonly scoreStateManager: ScoreStateManager) {
+  readonly #computedScores;
+
+  constructor(
+    private readonly scoreStateManager: ScoreStateManager,
+    private readonly webSocketService: WebSocketService,
+  ) {
     this.#state = scoreStateManager.asReadonly();
+
+    // computedシグナルでスコア計算結果をメモ化
+    this.#computedScores = this.#calculateScores();
+
+    // WebSocketからのルームデータを監視してスコアを同期
+    // setTimeoutを使用して変更検知サイクル外で更新
+    this.webSocketService.getRoomData().subscribe((roomData) => {
+      if (roomData?.scores) {
+        setTimeout(() => {
+          this.scoreStateManager.syncFromRoomData(roomData.scores);
+        }, 0);
+      }
+    });
   }
 
   public updateScore(username: string, score: UpdateScore) {
@@ -48,49 +67,55 @@ export class ScoreService {
   }
 
   public getScore(): Score[] {
-    return this.#state.scores().map((score) => {
-      const scienceSet = Math.min(
-        score.scienceScore.compass,
-        score.scienceScore.gear,
-        score.scienceScore.tablet,
-      );
-      const scienceScoreSum =
-        scienceSet * 7 +
-        (score.scienceScore.gear > 0
-          ? score.scienceScore.gear * score.scienceScore.gear
-          : 0) +
-        (score.scienceScore.compass > 0
-          ? score.scienceScore.compass * score.scienceScore.compass
-          : 0) +
-        (score.scienceScore.tablet > 0
-          ? score.scienceScore.tablet * score.scienceScore.tablet
-          : 0);
-      const scoreSum = Object.values(score).reduce(
-        (sum: number, value): number => {
-          if (typeof value === 'number') {
-            return sum + value;
-          }
-          if (
-            typeof value === 'object' &&
-            'gear' in value &&
-            'compass' in value &&
-            'tablet' in value
-          ) {
-            return sum + scienceScoreSum;
-          }
-          return sum;
-        },
-        0,
-      );
+    return this.#computedScores();
+  }
 
-      return {
-        ...score,
-        scienceScore: {
-          ...score.scienceScore,
-          sum: scienceScoreSum,
-        },
-        sum: scoreSum,
-      };
+  #calculateScores(): Signal<Score[]> {
+    return computed(() =>{
+      return this.#state.scores().map((score) => {
+        const scienceSet = Math.min(
+          score.scienceScore.compass,
+          score.scienceScore.gear,
+          score.scienceScore.tablet,
+        );
+        const scienceScoreSum =
+          scienceSet * 7 +
+          (score.scienceScore.gear > 0
+            ? score.scienceScore.gear * score.scienceScore.gear
+            : 0) +
+          (score.scienceScore.compass > 0
+            ? score.scienceScore.compass * score.scienceScore.compass
+            : 0) +
+          (score.scienceScore.tablet > 0
+            ? score.scienceScore.tablet * score.scienceScore.tablet
+            : 0);
+        const scoreSum = Object.values(score).reduce(
+          (sum: number, value): number => {
+            if (typeof value === 'number') {
+              return sum + value;
+            }
+            if (
+              typeof value === 'object' &&
+              'gear' in value &&
+              'compass' in value &&
+              'tablet' in value
+            ) {
+              return sum + scienceScoreSum;
+            }
+            return sum;
+          },
+          0,
+        );
+
+        return {
+          ...score,
+          scienceScore: {
+            ...score.scienceScore,
+            sum: scienceScoreSum,
+          },
+          sum: scoreSum,
+        };
+      });
     });
   }
 }

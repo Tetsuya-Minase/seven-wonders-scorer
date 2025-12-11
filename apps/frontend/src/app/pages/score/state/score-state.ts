@@ -20,12 +20,6 @@ export type ScoreState = Readonly<{
   coinScore: number;
   wonderScore: number;
 }>;
-export type Score = ScoreState & Readonly<{
-  scienceScore: Readonly<{
-    sum: number;
-  }>;
-  sum: number;
-}>;
 
 /**
  * Score type
@@ -183,6 +177,30 @@ export class ScoreStateManager implements SignalState<State> {
     return {
       scores: this.#scoreStateList.asReadonly(),
     };
+  }
+
+  /**
+   * sync scores from room data
+   * @param scores scores from WebSocket room data
+   */
+  public syncFromRoomData(scores: Record<string, ScoreState>): void {
+    const scoreList: ScoreState[] = Object.values(scores).map(score => ({
+      username: score.username,
+      civilScore: score.civilScore ?? 0,
+      militaryScore: score.militaryScore ?? 0,
+      scienceScore: {
+        gear: score.scienceScore?.gear ?? 0,
+        compass: score.scienceScore?.compass ?? 0,
+        tablet: score.scienceScore?.tablet ?? 0,
+      },
+      commercialScore: score.commercialScore ?? 0,
+      guildScore: score.guildScore ?? 0,
+      cityScore: score.cityScore ?? 0,
+      leaderScore: score.leaderScore ?? 0,
+      coinScore: score.coinScore ?? 0,
+      wonderScore: score.wonderScore ?? 0,
+    }));
+    this.#scoreStateList.set(scoreList);
   }
 
   /**
