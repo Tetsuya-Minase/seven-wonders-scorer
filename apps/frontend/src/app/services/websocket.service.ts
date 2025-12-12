@@ -47,7 +47,6 @@ export class WebSocketService {
     
     // ルームデータ更新イベントのリスナー
     this.socket.on('roomData', (data: any) => {
-      console.log('Room data updated:', data);
       this.roomData.next(data);
     });
   }

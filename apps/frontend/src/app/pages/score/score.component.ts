@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { ScoreUpdateModalComponent } from './components/score-update-modal/score-update-modal.component';
 import { RoomState } from './state/room.state';
+import { ScoreService } from './services/score.service';
 
 @Component({
   selector: 'seven-wonders-scorer-score',
@@ -29,6 +30,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly roomService: RoomService,
+    private readonly scoreService: ScoreService,
     private readonly roomState: RoomState,
     private readonly formBuilder: NonNullableFormBuilder,
     private readonly webSocketService: WebSocketService,
@@ -44,8 +46,6 @@ export class ScoreComponent implements OnInit, OnDestroy {
     // ローカルストレージからルーム名とユーザー名を取得
     const roomName = localStorage.getItem('roomName');
     const username = localStorage.getItem('username');
-    console.log('roomName:', roomName);
-    console.log('username:', username);
     if (!roomName || !username) {
       console.error('ルーム名またはユーザー名が見つかりません');
       // ルーム名またはユーザー名がない場合はログイン画面にリダイレクト
@@ -111,7 +111,7 @@ export class ScoreComponent implements OnInit, OnDestroy {
    * computedシグナルにより、同じ参照が返されるためNG0100エラーが解消される
    */
   public get scores() {
-    return this.roomState.scores;
+    return this.scoreService.getScore();
   }
   
   public logout(): void {
