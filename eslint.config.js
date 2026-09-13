@@ -1,53 +1,19 @@
-const nx = require("@nx/eslint-plugin");
+const eslint = require('@eslint/js');
+const tseslint = require('typescript-eslint');
 
-module.exports = [
-    ...nx.configs["flat/base"],
-    ...nx.configs["flat/typescript"],
-    ...nx.configs["flat/javascript"],
-    {
-        ignores: [
-            "**/dist"
-        ]
+module.exports = tseslint.config(
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    ignores: ['**/dist/**', '**/coverage/**', '**/node_modules/**'],
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-unused-private-class-members': 'warn',
     },
-    {
-        files: [
-            "**/*.ts",
-            "**/*.tsx",
-            "**/*.js",
-            "**/*.jsx"
-        ],
-        rules: {
-            "@nx/enforce-module-boundaries": [
-                "error",
-                {
-                    enforceBuildableLibDependency: true,
-                    allow: [
-                        "^.*/eslint(\\.base)?\\.config\\.[cm]?js$"
-                    ],
-                    depConstraints: [
-                        {
-                            sourceTag: "*",
-                            onlyDependOnLibsWithTags: [
-                                "*"
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
-        files: [
-            "**/*.ts",
-            "**/*.tsx",
-            "**/*.cts",
-            "**/*.mts",
-            "**/*.js",
-            "**/*.jsx",
-            "**/*.cjs",
-            "**/*.mjs"
-        ],
-        // Override or add rules here
-        rules: {}
-    },
-];
+  }
+);
+

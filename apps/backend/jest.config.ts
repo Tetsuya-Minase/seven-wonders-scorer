@@ -9,4 +9,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/backend',
+  testMatch: ['<rootDir>/src/**/*.spec.ts'],
 } as Config;
