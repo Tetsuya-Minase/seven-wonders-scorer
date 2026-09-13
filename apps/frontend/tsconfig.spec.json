@@ -3,8 +3,14 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
+    "moduleResolution": "node10",
     "target": "es2016",
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "@angular/core/testing": ["node_modules/@angular/core/types/testing.d.ts"],
+      "@angular/*/testing": ["node_modules/@angular/*/types/testing.d.ts"]
+    }
   },
   "files": ["src/test-setup.ts"],
   "include": [
