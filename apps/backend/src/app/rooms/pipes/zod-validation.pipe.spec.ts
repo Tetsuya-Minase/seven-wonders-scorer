@@ -62,6 +62,18 @@ describe('ZodValidationPipe', () => {
     }
   });
 
+  it('should bypass validation and return original value when argument metadata type is not body', () => {
+    // Given
+    const mockSocket = { id: 'socket-123' };
+    const metadata = { type: 'custom' } as any;
+
+    // When
+    const result = pipe.transform(mockSocket, metadata);
+
+    // Then
+    expect(result).toBe(mockSocket);
+  });
+
   describe('Invariants', () => {
     it('should always throw only WsException for any invalid input', () => {
       // Given

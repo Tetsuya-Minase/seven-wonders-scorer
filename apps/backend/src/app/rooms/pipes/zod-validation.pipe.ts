@@ -1,4 +1,4 @@
-import { PipeTransform, Injectable } from '@nestjs/common';
+import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
 import { WsException } from '@nestjs/websockets';
 import { type ZodType } from 'zod';
 
@@ -16,12 +16,18 @@ export class ZodValidationPipe implements PipeTransform {
 
   /**
    * 受信した値をスキーマに従って検証・変換します。
+   * `@MessageBody()` 以外の引数（`@ConnectedSocket()` など）は検証をスキップしてそのまま返します。
    * 
    * @param value 検証対象の入力値
+   * @param metadata 引数のメタデータ情報
    * @returns 検証済みのデータ
    * @throws WsException 検証に失敗した場合、または予期せぬエラーが発生した場合
    */
-  transform(value: unknown): unknown {
+  transform(value: unknown, metadata?: ArgumentMetadata): unknown {
+    if (metadata && metadata.type !== 'body') {
+      return value;
+    }
+
     try {
       const result = this.schema.safeParse(value);
 

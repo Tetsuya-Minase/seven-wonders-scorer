@@ -6,7 +6,7 @@ import {
   ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { Logger, UseFilters, UseGuards, UsePipes } from '@nestjs/common';
+import { Logger, UseFilters, UseGuards } from '@nestjs/common';
 import { RoomsService } from './rooms.service';
 import { joinRoomSchema, JoinRoomPayload } from './schemas/join-room.schema';
 import { addUserSchema, AddUserPayload } from './schemas/add-user.schema';
@@ -78,11 +78,10 @@ export class RoomsGateway {
    * @param payload ルーム参加に必要な情報（ルーム名、ユーザー名）
    * @returns 参加したルームの情報
    */
-  @UsePipes(new ZodValidationPipe(joinRoomSchema))
   @SubscribeMessage('joinRoom')
   handleJoinRoom(
     @ConnectedSocket() client: Socket,
-    @MessageBody() payload: JoinRoomPayload,
+    @MessageBody(new ZodValidationPipe(joinRoomSchema)) payload: JoinRoomPayload,
   ) {
     const { roomName, username } = payload;
     
@@ -101,11 +100,10 @@ export class RoomsGateway {
    * @param payload スコア更新情報
    * @returns 更新の成功状態と最新のルームデータ、またはエラー情報
    */
-  @UsePipes(new ZodValidationPipe(updateScoreSchema))
   @SubscribeMessage('updateScore')
   handleUpdateScore(
     @ConnectedSocket() client: Socket,
-    @MessageBody() payload: UpdateScorePayload,
+    @MessageBody(new ZodValidationPipe(updateScoreSchema)) payload: UpdateScorePayload,
   ) {
     const { username, score } = payload;
     
@@ -128,11 +126,10 @@ export class RoomsGateway {
    * @param payload 追加するユーザー情報
    * @returns 更新の成功状態と最新のルームデータ、またはエラー情報
    */
-  @UsePipes(new ZodValidationPipe(addUserSchema))
   @SubscribeMessage('addUser')
   handleAddUser(
     @ConnectedSocket() client: Socket,
-    @MessageBody() payload: AddUserPayload,
+    @MessageBody(new ZodValidationPipe(addUserSchema)) payload: AddUserPayload,
   ) {
     const { username } = payload;
     
